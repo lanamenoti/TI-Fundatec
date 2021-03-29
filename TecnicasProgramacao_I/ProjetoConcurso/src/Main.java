@@ -1,4 +1,6 @@
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -19,18 +21,6 @@ public class Main {
 		// 7 - Mostrar os concursos com um determinado numero de vagas
 		// 8 - Sair
 
-		// InformaÃ§Ãµes da prova
-		// data (LocalDateTime)
-		// local (Endereco)
-		// numeroVagas (int);
-		// descricao (String)
-		// empresa (String);
-		// salarioBase (double)
-
-		// InformaÃ§Ãµes do Candidato
-		// nome (String);
-		// cpf (String)
-
 		Scanner teclado = new Scanner(System.in);
 
 		String opcao = "S";
@@ -45,7 +35,15 @@ public class Main {
 			System.out.println("1 - Cadastrar prova");
 			System.out.println("2 - Cadastrar um candidato");
 			System.out.println("3 - Inscrever um candidato para uma determinada prova");
+			System.out.println("4 - Mostrar concursos com intervalos entre datas");
+			System.out.println("5 - Mostrar concursos com salarios maiores que um determinado valor");
+			System.out.println("6 - Mostrar concursos de uma determinada cidade");
+			System.out.println("7 - Mostrar os concursos com um determinado numero de vagas");
+			System.out.println("8 - Mostrar todos os concursos");
+			System.out.println("9 - Mostrar todos os candidatos");
+			System.out.println("10 - Sair");
 
+			
 			int opcaoMenu = teclado.nextInt();
 			
 			if (opcaoMenu == 1) {
@@ -115,20 +113,17 @@ public class Main {
 				
 				bancoDeDados.adicionarProvas(prova);
 				
-				for (Prova p : bancoDeDados.getProvas()) {
-					System.out.println(p.getData());
-					System.out.println(p.getLocal());
-					System.out.println(p.getNumeroVagas());
-				}
-				
 			} else if (opcaoMenu == 2) {
+				
 				System.out.println("Informe o nome:");
 				String nome = teclado.next();
+				
 				System.out.println("Informe o CPF:");
 				String cpf = teclado.next();
 
 				Candidato candidato = new Candidato(nome, cpf);
 				bancoDeDados.adicionarCandidatos(candidato);
+				
 			} else if (opcaoMenu == 3) {
 				System.out.println("Informe o cpf do candidato:");
 				String cpf = teclado.next();
@@ -151,6 +146,133 @@ public class Main {
 				if (candidatoFiltrado != null && provaEncontrada != null) {
 					provaEncontrada.inscreverCandidato(candidatoFiltrado);
 				}
+				
+			} else if (opcaoMenu == 4) {
+				
+				System.out.println("Informe o ano de início do intervalo que deseja filtrar:");
+				int anoInicial = teclado.nextInt();
+				
+				System.out.println("Informe o mes de início do intervalo que deseja filtrar:");
+				int mesInicial = teclado.nextInt();
+				
+				System.out.println("Informe o dia de início do intervalo que deseja filtrar:");
+				int diaInicial = teclado.nextInt();
+				
+				
+				LocalDateTime inicioIntervalo = LocalDateTime.of(anoInicial, mesInicial, diaInicial, 0, 0);
+				
+				System.out.println("Informe o ano de final do intervalo que deseja filtrar:");
+				int anoFinal = teclado.nextInt();
+				
+				System.out.println("Informe o mes de final do intervalo que deseja filtrar:");
+				int mesFinal = teclado.nextInt();
+				
+				System.out.println("Informe o dia de final do intervalo que deseja filtrar:");
+				int diaFinal = teclado.nextInt();
+				
+				
+				LocalDateTime finalIntervalo = LocalDateTime.of(anoFinal, mesFinal, diaFinal, 23, 59);
+				
+				List<Prova> provasFiltradasPorIntervalo = bancoDeDados.filtrarProvasPorIntervalo(inicioIntervalo, finalIntervalo);
+				
+				if (provasFiltradasPorIntervalo.size() != 0) {
+					System.out.println("As provas no intervalo " + inicioIntervalo + "-" + finalIntervalo + " são:");
+					
+					for (Prova prova : provasFiltradasPorIntervalo) {
+						System.out.println("Prova " + prova.getId() + ":");
+						System.out.println(prova.getDescricao());
+						System.out.println(prova.getSalarioBase());
+						System.out.println("-------------------------------------------------");
+					}
+					
+				} else {
+					System.out.println("Não existem provas no intervalo " + inicioIntervalo + "-" + finalIntervalo);	
+				}
+				
+			} else if (opcaoMenu == 5) {
+				
+				System.out.println("Informe um salário mínimo que deseja filtrar:");
+				double salarioBuscado = teclado.nextDouble();
+				
+				List<Prova> provasFiltradasPorSalario = bancoDeDados.filtrarProvasComSalarioMaiorQue(salarioBuscado);
+				
+				if (provasFiltradasPorSalario.size() != 0) {
+					System.out.println("As provas com salário maior que " + salarioBuscado + " são:");
+					
+					for (Prova prova : provasFiltradasPorSalario) {
+						System.out.println("Prova " + prova.getId() + ":");
+						System.out.println(prova.getDescricao());
+						System.out.println(prova.getSalarioBase());
+						System.out.println("-------------------------------------------------");
+					}
+					
+				} else {
+					System.out.println("Não existem provas com salário maior que " + salarioBuscado);	
+				}
+				
+			} else if (opcaoMenu == 6) {
+				
+				System.out.println("Informe a cidade que deseja filtrar: ");
+				String cidadeAEncontrar = teclado.next();
+				
+				List<Prova> provasFiltradasPorCidade = bancoDeDados.filtrarProvasPorCidade(cidadeAEncontrar);
+				
+				if (provasFiltradasPorCidade.size() != 0) {
+					System.out.println("As provas da cidade " + cidadeAEncontrar + " são:");
+					
+					for (Prova prova : provasFiltradasPorCidade) {
+						System.out.println("Prova " + prova.getId() + ":");
+						System.out.println(prova.getDescricao());
+						System.out.println(prova.getSalarioBase());
+						System.out.println("-------------------------------------------------");
+					}
+					
+				} else {
+					System.out.println("Não existem provas na cidade " + cidadeAEncontrar);	
+				}
+				
+			} else if (opcaoMenu == 7) {
+				
+				System.out.println("Informe o número de vagas que deseja filtrar:");
+				int numeroDeVagasAFiltrar = teclado.nextInt();
+				
+				List<Prova> provasFiltradasPorNumeroDeVagas = bancoDeDados.filtrarProvasPorNumeroDeVagas(numeroDeVagasAFiltrar);
+				
+				if (provasFiltradasPorNumeroDeVagas.size() != 0) {
+					System.out.println("As provas da cidade " + numeroDeVagasAFiltrar + " são:");
+					
+					for (Prova prova : provasFiltradasPorNumeroDeVagas) {
+						System.out.println("Prova " + prova.getId() + ":");
+						System.out.println(prova.getDescricao());
+						System.out.println(prova.getSalarioBase());
+						System.out.println("-------------------------------------------------");
+					}
+					
+				} else {
+					System.out.println("Não existem provas com " + numeroDeVagasAFiltrar + " número de vagas.");	
+				}
+				
+			} else if (opcaoMenu == 8) {
+				System.out.println("As provas cadastradas são:");
+				
+				for (Prova provaCadastrada : bancoDeDados.getProvas()) {
+					System.out.println("ID da prova: " + provaCadastrada.getId());
+					System.out.println("Descrição da prova: " + provaCadastrada.getDescricao());
+					System.out.println("Data da prova: " + provaCadastrada.getData());
+					System.out.println("-------------------------------------------------");
+				}
+				
+			} else if (opcaoMenu == 9) {
+				
+				System.out.println("Os candidatos cadastrados são:");
+				
+				for (Candidato candidatoCadastrado : bancoDeDados.getCandidatos()) {
+					System.out.println("Nome do candidato: " + candidatoCadastrado.getNome());
+					System.out.println("Cpf do candidato: " + candidatoCadastrado.getCpf());
+					System.out.println("-------------------------------------------------");
+				}
+			} else if (opcaoMenu == 10) {
+				opcao = "N";
 			}
 
 		}

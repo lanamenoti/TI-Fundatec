@@ -52,7 +52,29 @@ public class Prova {
 		return salarioBase;
 	}
 	
+	public List<Candidato> getCandidatosInscritos() {
+		return candidatosInscritos;
+	}
+	
 	public void inscreverCandidato(Candidato candidato) {
-			this.candidatosInscritos.add(candidato);
+		boolean candidatoInscrito = validarInscricaoCandidato(candidato);
+		
+		if (candidatoInscrito) {
+			System.out.println("Candidato já está inscrito");
+			return;
+		}
+		
+		this.candidatosInscritos.add(candidato);
+	}
+	
+	private boolean validarInscricaoCandidato(Candidato candidato) {
+		
+		for (Candidato candidatoLoop : candidatosInscritos) {
+			if(candidatoLoop.getCpf().equals(candidato.getCpf())) {
+				return true;
+			}
+		}
+		
+		return false;
 	}
 }
