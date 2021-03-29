@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formulário de Endereço</title>
+  </head>
+  <body>
+    <center><h1>Cadastro de Endereço</h1></center>
+    <center>
+      <table>
+        <tr>
+          <td colspan="2">Tipo de logradouro</td>
+          <td colspan="5">Logradouro</td>
+          <td>Número</td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <select name="tipoLogradouro" id="tipoLogradouro">
+              <option value="rua" select>Rua</option>
+              <option value="estrada">Estrada</option>
+              <option value="condominio">Condomínio</option>
+            </select>
+          </td>
+          <td colspan="5">
+            <input
+              type="text"
+              placeholder="Digite o logradouro"
+              name="logradouro"
+            />
+          </td>
+          <td>
+            <input type="number" name="numeroLogradouro" />
+          </td>
+        </tr>
+        <tr height="10px"></tr>
+        <tr>
+          <td>Bairro</td>
+          <td width="10px"></td>
+          <td>Cidade</td>
+          <td width="10px"></td>
+          <td>Estado</td>
+          <td width="10px"></td>
+          <td>CEP</td>
+        </tr>
+        <tr>
+          <td><input type="text" placeholder="Digite o bairro" /></td>
+          <td width="10px"></td>
+          <td><input type="text" placeholder="Digite a cidade" /></td>
+          <td width="10px"></td>
+          <td>
+            <select name="estado" id="estado">
+              <option value="rs" select>RS</option>
+              <option value="rj">RJ</option>
+              <option value="sc">SC</option>
+            </select>
+          </td>
+          <td width="10px"></td>
+          <td><input type="number" name="cep" maxlength="8" /></td>
+        </tr>
+        <tr height="10px"></tr>
+        <tr>
+          <td>
+            <button type="submit" colspan="5">Salvar</button>
+          </td>
+        </tr>
+      </table>
+    </center>
+  </body>
+</html>
