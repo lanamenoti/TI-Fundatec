@@ -14,49 +14,49 @@ public class FormPage {
 
     public WebElement getInputName() {
         return this.driver.findElement(
-                By.xpath("//div[@class='col s9']/div[@class='row']/div[@class='col s8 center']/form[@id='new_user']/div[@class='row']/div[@class='col s6']/div[@class='input-field']/input[@id='user_name']")
+                By.id("user_name")
         );
     }
 
     public WebElement getInputLastName() {
         return this.driver.findElement(
-                By.xpath("//div[@class='col s9']/div[@class='row']/div[@class='col s8 center']/form[@id='new_user']/div[@class='row']/div[@class='col s6']/div[@class='input-field']/input[@id='user_lastname']")
+                By.id("user_lastname")
         );
     }
 
     public WebElement getInputEmail() {
         return this.driver.findElement(
-                By.xpath("//div[@class='col s9']/div[@class='row']/div[@class='col s8 center']/form[@id='new_user']/div[@class='row']/div[@class='col s6']/div[@class='input-field']/input[@id='user_email']")
+                By.id("user_email")
         );
     }
 
     public WebElement getInputAddress() {
         return this.driver.findElement(
-                By.xpath("//div[@class='col s9']/div[@class='row']/div[@class='col s8 center']/form[@id='new_user']/div[@class='row']/div[@class='col s6']/div[@class='input-field']/input[@id='user_address']")
+                By.id("user_address")
         );
     }
 
     public WebElement getInputUniversity() {
         return this.driver.findElement(
-                By.xpath("//div[@class='col s9']/div[@class='row']/div[@class='col s8 center']/form[@id='new_user']/div[@class='row']/div[@class='col s6']/div[@class='input-field']/input[@id='user_university']")
+                By.id("user_university")
         );
     }
 
     public WebElement getInputProfile() {
         return this.driver.findElement(
-                By.xpath("//div[@class='col s9']/div[@class='row']/div[@class='col s8 center']/form[@id='new_user']/div[@class='row']/div[@class='col s6']/div[@class='input-field']/input[@id='user_profile']")
+                By.id("user_profile")
         );
     }
 
     public WebElement getInputGender() {
         return this.driver.findElement(
-                By.xpath("//div[@class='col s9']/div[@class='row']/div[@class='col s8 center']/form[@id='new_user']/div[@class='row']/div[@class='col s6']/div[@class='input-field']/input[@id='user_gender']")
+                By.id("user_gender")
         );
     }
 
     public WebElement getInputAge() {
         return this.driver.findElement(
-                By.xpath("//div[@class='col s9']/div[@class='row']/div[@class='col s8 center']/form[@id='new_user']/div[@class='row']/div[@class='col s6']/div[@class='input-field']/input[@id='user_age']")
+                By.id("user_age")
         );
     }
 
